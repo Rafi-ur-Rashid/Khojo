@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".View.FirstActivity"
+    tools:showIn="@layout/activity_first">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="2.5"
+           android:gravity="center"
+           android:background="@android:color/background_light"
+           android:baselineAligned="false"
+           android:orientation="vertical"
+           android:weightSum="4">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginBottom="10dp">
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <ImageButton
+                       android:id="@+id/imageView1"
+                       style="@android:style/Widget.Holo.ImageButton"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@android:color/background_light"
+                       app:srcCompat="@mipmap/hostel" />
+
+                   <TextView
+                       android:id="@+id/textView1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Hostel"
+
+                       android:textColor="@android:color/background_dark" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <ImageButton
+                       android:id="@+id/imageView2"
+                       style="@android:style/Widget.Holo.ImageButton"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@android:color/background_light"
+                       app:srcCompat="@mipmap/roommate" />
+
+                   <TextView
+                       android:id="@+id/textView2"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Roommate"
+
+                       android:textColor="@android:color/background_dark" />
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <ImageButton
+                       android:id="@+id/imageView3"
+                       style="@android:style/Widget.Holo.ImageButton"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@android:color/background_light"
+                       app:srcCompat="@mipmap/showroom" />
+
+                   <TextView
+                       android:id="@+id/textView3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Shop"
+
+                       android:textColor="@android:color/background_dark" />
+               </LinearLayout>
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <ImageButton
+                       android:id="@+id/imageView4"
+                       style="@android:style/Widget.Holo.ImageButton"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@android:color/background_light"
+                       app:srcCompat="@mipmap/sublet" />
+
+                   <TextView
+                       android:id="@+id/textView4"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@android:color/background_dark"
+
+                       android:text="Sublet" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <ImageButton
+                       android:id="@+id/imageView5"
+                       style="@android:style/Widget.Holo.ImageButton"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@android:color/background_light"
+                       app:srcCompat="@mipmap/tolet" />
+
+                   <TextView
+                       android:id="@+id/textView5"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@android:color/background_dark"
+
+                       android:text="Flat" />
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <ImageButton
+                       android:id="@+id/imageView6"
+                       style="@android:style/Widget.Holo.ImageButton"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@android:color/background_light"
+                       app:srcCompat="@mipmap/office" />
+
+                   <TextView
+                       android:id="@+id/textView6"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@android:color/background_dark"
+
+                       android:text="Office" />
+               </LinearLayout>
+           </LinearLayout>
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="3.5"
+           android:layout_marginTop="2dp"
+           android:background="@android:color/background_light"
+           android:orientation="vertical"
+           android:gravity="center"
+           android:paddingBottom="10dp">
+
+           <TextView
+               android:id="@+id/textView"
+               android:layout_width="wrap_content"
+               android:layout_height="0dp"
+               android:gravity="center"
+               android:layout_weight="1"
+               android:paddingLeft="5dp"
+               android:textColor="@android:color/background_dark"
+               android:text="What are you searching?"
+               android:textSize="18dp" />
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="0dp"
+               android:layout_weight="1"
+               android:gravity="center"
+               android:background="@android:drawable/editbox_background_normal">
+
+               <Spinner
+                   android:id="@+id/spinner"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:prompt="@string/spinner_prompt" />
+           </LinearLayout>
+
+           <AutoCompleteTextView
+               android:id="@+id/autoCompleteTextView1"
+               android:layout_width="150dp"
+               android:layout_height="0dp"
+               android:layout_weight="1"
+               android:ems="8"
+               android:hint=" Location:"
+               android:backgroundTint="@color/colorPrimary"/>
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="0dp"
+               android:layout_weight="1"
+               android:gravity="center">
+               <Button
+                   android:id="@+id/button"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:layout_marginTop="5dp"
+                   android:text="Search"
+                   android:textColor="@android:color/background_light"
+                   android:textSize="15dp"
+                   app:backgroundTint="#009688" />
+           </LinearLayout>
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:background="@android:color/background_light"
+           android:layout_marginTop="2dp"
+           android:paddingBottom="10dp"
+           android:layout_weight="2.5">
+
+           <ImageView
+               android:id="@+id/imageView8"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:paddingRight="15dp"
+               android:paddingLeft="20dp"
+               android:paddingBottom="20dp"
+               android:paddingTop="20dp"
+               android:layout_weight="1"
+               app:srcCompat="@drawable/ads"
+               android:onClick="goToAd"/>
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_weight="2"
+               android:orientation="vertical"
+               android:layout_height="match_parent">
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="0dp"
+                   android:text="Have Your Own Property?"
+                   android:textColor="@android:color/background_dark"
+                   android:gravity="center|left"
+                   android:paddingTop="10dp"
+                   android:textSize="20dp"
+                   android:layout_weight="2"/>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="0dp"
+                   android:layout_weight="1.5">
+                   <Button
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="top|left"
+                       android:text="Advertise Here"
+                       android:paddingBottom="5dp"
+                       app:backgroundTint="@color/colorPrimary" />
+               </LinearLayout>
+           </LinearLayout>
+       </LinearLayout>
+   </LinearLayout>
+</LinearLayout>
