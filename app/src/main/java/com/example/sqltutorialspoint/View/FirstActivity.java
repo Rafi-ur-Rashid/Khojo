@@ -45,14 +45,14 @@ public class FirstActivity extends AppCompatActivity implements AdapterView.OnIt
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //getSupportActionBar().setIcon(R.drawable.ic_menu_share);
-        ad_image=(ImageView)findViewById(R.id.imageView8);
-        ad=false;
-        memberPresenter=new MemberPresenter(this);
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LayoutParams layout = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         View v = inflator.inflate(R.layout.first_actionbar, null);
         getSupportActionBar().setCustomView(v, layout);
+        ad_image=(ImageView)findViewById(R.id.imageView8);
+        ad=false;
+        memberPresenter=new MemberPresenter(this);
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         AutoCompleteTextView autocomplete = (AutoCompleteTextView)
                 findViewById(R.id.autoCompleteTextView1);
@@ -157,9 +157,9 @@ public class FirstActivity extends AppCompatActivity implements AdapterView.OnIt
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            //memberPresenter.updateSession(member_id,0);
+                            memberPresenter.updateSession(member_id,0);
                             logged_in=false;
-                            Toast.makeText(FirstActivity.this,"Signed out "+member_id,Toast.LENGTH_LONG);
+                            Toast.makeText(FirstActivity.this,"Signed out",Toast.LENGTH_LONG);
                             Intent intent = new Intent(getApplicationContext(), FirstActivity.class);
                             startActivity(intent);
                             finish();
@@ -201,7 +201,8 @@ public class FirstActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void goToAd(View view) {
-
+        Intent intent=new Intent(this,AdvertiseListActivity.class);
+        startActivity(intent);
     }
 
     void startRepeatingTask() {

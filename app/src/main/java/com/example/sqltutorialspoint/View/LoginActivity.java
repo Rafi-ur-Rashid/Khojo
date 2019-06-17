@@ -103,9 +103,9 @@ public class LoginActivity extends AppCompatActivity implements GoToFirstActivit
                                 onLoginFailed(2);
                             }
                             else if(memberPresenter.matchPassword(email,password)) {
-                                onLoginSuccess();
                                 member_id=memberPresenter.getId(email);
                                 memberPresenter.updateSession(member_id,1);
+                                onLoginSuccess();
                             }
                             else
                                 onLoginFailed(1);

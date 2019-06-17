@@ -97,9 +97,9 @@ public class SignupActivity extends AppCompatActivity implements GoToFirstActivi
                                 onSignupFailed(2);
                             }
                             else if(memberPresenter.insertMember(name,email,password)) {
-                                onSignupSuccess();
                                 member_id=memberPresenter.getId(email);
                                 memberPresenter.updateSession(member_id,1);
+                                onSignupSuccess();
                             }
                             else
                                 onSignupFailed(1);
