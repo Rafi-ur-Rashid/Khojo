@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/actionButtonStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="fill_horizontal"
+    android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:gravity="top|right">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center|left"
+        android:text="Khojo"
+        android:textColor="@android:color/background_light"
+        android:textSize="25dp" />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        ></Spinner>
+    <TextView
+        android:id="@+id/sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="15dp"
+        android:text="Sign in"
+        android:layout_gravity="right|center"
+        android:gravity="center|right"
+        android:textColor="@android:color/background_light"
+        android:onClick="goTosignIn"/>
+
+</LinearLayout>

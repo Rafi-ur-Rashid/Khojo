@@ -13,7 +13,7 @@ public class Category_and_locationAdapter {
     public ArrayAdapter getCategoryAdapter(){
         // Spinner Drop down elements
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, constants.CATEGORIES);
+        SpinnerAdapter dataAdapter = new SpinnerAdapter(context,constants.CATEGORIES,android.R.layout.simple_spinner_item);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return dataAdapter;

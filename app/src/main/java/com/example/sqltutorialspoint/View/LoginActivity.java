@@ -3,9 +3,15 @@ package com.example.sqltutorialspoint.View;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -17,7 +23,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sqltutorialspoint.Interface.GoToFirstActivity;
-import com.example.sqltutorialspoint.Presenter.AdminPresenter;
 import com.example.sqltutorialspoint.Presenter.MemberPresenter;
 import com.example.sqltutorialspoint.R;
 import com.google.android.material.button.MaterialButton;
@@ -29,10 +34,11 @@ import butterknife.ButterKnife;
 
 import static com.example.sqltutorialspoint.Utility.constants.REQUEST_SIGNUP;
 
-public class LoginActivity extends AppCompatActivity implements GoToFirstActivity {
-    AdminPresenter adminPresenter;
+public class LoginActivity extends AppCompatActivity implements GoToFirstActivity{
     MemberPresenter memberPresenter;
     String member_id;
+    Bundle bundle;
+    boolean addAd;
     private static final String TAG = "LoginActivity";
 
     @BindView(R.id.input_email) EditText _emailText;
@@ -49,8 +55,31 @@ public class LoginActivity extends AppCompatActivity implements GoToFirstActivit
         _signupLink=(TextView)findViewById(R.id.link_signup);
         _emailText=(EditText)findViewById(R.id.input_email);
         _passwordText=(EditText)findViewById(R.id.input_password);
+        bundle = getIntent().getExtras();
+        addAd=bundle.getBoolean("addAd");
+        if(addAd){
+            Toast.makeText(LoginActivity.this,"You Have to Log in First",Toast.LENGTH_LONG).show();
+        }
         ButterKnife.bind(this);
-        adminPresenter=new AdminPresenter(this);
+        SpannableString ss=new SpannableString("No account yet? Create one");
+        ClickableSpan clickableSpan1 = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                intent.putExtra("addAd",addAd);
+                startActivityForResult(intent, REQUEST_SIGNUP);
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(Color.BLUE);
+                ds.setUnderlineText(false);
+            }
+        };
+        ss.setSpan(clickableSpan1, 16, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        _signupLink.setText(ss);
+        _signupLink.setMovementMethod(LinkMovementMethod.getInstance());
         memberPresenter=new MemberPresenter(this,this);
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -60,15 +89,6 @@ public class LoginActivity extends AppCompatActivity implements GoToFirstActivit
             }
         });
 
-        _signupLink.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
-            }
-        });
     }
 
     public void login() {
@@ -81,11 +101,13 @@ public class LoginActivity extends AppCompatActivity implements GoToFirstActivit
 
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.Theme_AppCompat_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
-        progressDialog.show();
+        final ProgressDialog progressBar= new ProgressDialog(this);
+        progressBar.setCancelable(true);
+        progressBar.setMessage("Authenticating...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.setProgress(0);
+        progressBar.setMax(100);
+        progressBar.show();
 
         final String email = _emailText.getText().toString();
         final String password = _passwordText.getText().toString();
@@ -104,7 +126,8 @@ public class LoginActivity extends AppCompatActivity implements GoToFirstActivit
                             }
                             else if(memberPresenter.matchPassword(email,password)) {
                                 member_id=memberPresenter.getId(email);
-                                memberPresenter.updateSession(member_id,1);
+                                System.out.println("Hellooooo "+member_id+" "+memberPresenter.updateSession(member_id,1));
+
                                 onLoginSuccess();
                             }
                             else
@@ -114,7 +137,7 @@ public class LoginActivity extends AppCompatActivity implements GoToFirstActivit
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        progressDialog.dismiss();
+                        progressBar.dismiss();
                     }
                 }, 3000);
     }
@@ -143,7 +166,15 @@ public class LoginActivity extends AppCompatActivity implements GoToFirstActivit
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         Toast.makeText(getBaseContext(), "Login success", Toast.LENGTH_LONG).show();
-        memberPresenter.changeActivity();
+        if(!addAd)
+            memberPresenter.goToFirstActivity();
+        else
+        {
+            Intent intent = new Intent(this, AddnewAdvertiseActivity.class);
+            intent.putExtra("id",member_id);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void onLoginFailed(int id) {

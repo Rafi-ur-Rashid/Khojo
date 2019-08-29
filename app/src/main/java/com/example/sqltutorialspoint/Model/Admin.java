@@ -2,24 +2,24 @@ package com.example.sqltutorialspoint.Model;
 
 import android.content.Context;
 
-import com.example.sqltutorialspoint.Service.dbConnection;
+import com.example.sqltutorialspoint.Service.dbConnectionForTextData;
 
-import static com.example.sqltutorialspoint.Utility.constants.ADMIN_INSERT_PHP;
+import java.util.concurrent.ExecutionException;
+
+import static com.example.sqltutorialspoint.Utility.constants.ADMIN_NAME_BY_ID;
 
 public class Admin {
     Context context;
+    dbConnectionForTextData dbcon;
 
-    dbConnection dbcon;
     public Admin(Context context) {
         this.context = context;
-        dbcon=new dbConnection(context);
+        dbcon=new dbConnectionForTextData(context);
     }
-
-    public boolean insertAdmin(String ID,String Name,String email,String pw)throws Exception{
-        String s= (String) dbcon.execute("admin/"+ADMIN_INSERT_PHP+"?adminId="+ID+"&adminName="+Name+"&email_phone="+email+"&password="+pw).get();
-        dbcon.cancel(true);
-        return s.equals("success");
+    public String getName(String id) throws ExecutionException, InterruptedException {
+        dbcon=new dbConnectionForTextData(context);
+        String s= (String)  dbcon.execute("admin/"+ADMIN_NAME_BY_ID+"?admin_id="+id).get();
+        //dbcon.cancel(true);
+        return s;
     }
 }
-
-

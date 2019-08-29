@@ -7,4 +7,23 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_profile"
+        android:orderInCategory="100"
+        android:title="@string/action_profile"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_editAd"
+        android:orderInCategory="100"
+        android:title="@string/action_edit_ad"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_timeline"
+        android:orderInCategory="100"
+        android:title="@string/action_timeline"
+        android:visible="false"
+        app:showAsAction="never" />
+
 </menu>

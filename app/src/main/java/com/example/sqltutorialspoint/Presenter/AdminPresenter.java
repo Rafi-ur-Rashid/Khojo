@@ -4,17 +4,21 @@ import android.content.Context;
 
 import com.example.sqltutorialspoint.Model.Admin;
 
+import java.util.concurrent.ExecutionException;
+
 public class AdminPresenter {
-    Context context;
     Admin admin;
+    Context context;
+
     public AdminPresenter(Context context) {
         this.context = context;
         admin=new Admin(context);
     }
-    public void insertAdmin(String id,String name,String email,String pw) throws Exception {
-         admin.insertAdmin(id,name,email,pw);
-    }
-    public boolean matchPassword(String email,String pw){
-        return false;
+    public boolean isAdmin(String id) throws ExecutionException, InterruptedException {
+        String s = admin.getName(id);
+        if (s.length() < 1)
+            return false;
+        else
+            return true;
     }
 }

@@ -3,10 +3,15 @@ package com.example.sqltutorialspoint.View;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -16,19 +21,27 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sqltutorialspoint.Interface.GoToFirstActivity;
+import com.example.sqltutorialspoint.Interface.GoToverifyMailorPhone;
 import com.example.sqltutorialspoint.Presenter.MemberPresenter;
 import com.example.sqltutorialspoint.R;
+import com.example.sqltutorialspoint.Service.dbConnectionForTextData;
+import com.example.sqltutorialspoint.Service.verifyMailAddress;
 import com.google.android.material.button.MaterialButton;
+
+import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.sqltutorialspoint.Utility.constants.VERIFY_BY_SMS;
 
-public class SignupActivity extends AppCompatActivity implements GoToFirstActivity {
-    private static final String TAG = "SignupActivity";
+
+public class SignupActivity extends AppCompatActivity implements GoToverifyMailorPhone {
     MemberPresenter memberPresenter;
-    String member_id;
+    String member_id,email,name,password;
+    Bundle bundle;
+    boolean addAd;
     @BindView(R.id.input_name) EditText _nameText;
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_password) EditText _passwordText;
@@ -45,7 +58,26 @@ public class SignupActivity extends AppCompatActivity implements GoToFirstActivi
         _emailText=(EditText)findViewById(R.id.input_email);
         _passwordText=(EditText)findViewById(R.id.input_password);
         _nameText=(EditText)findViewById(R.id.input_name);
+        bundle = getIntent().getExtras();
+        addAd=bundle.getBoolean("addAd");
         ButterKnife.bind(this);
+        SpannableString ss=new SpannableString("Already a member? Login");
+        ClickableSpan clickableSpan1 = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                finish();
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(Color.BLUE);
+                ds.setUnderlineText(false);
+            }
+        };
+        ss.setSpan(clickableSpan1, 18, 23, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        _loginLink.setText(ss);
+        _loginLink.setMovementMethod(LinkMovementMethod.getInstance());
         memberPresenter=new MemberPresenter(this,this);
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,18 +86,12 @@ public class SignupActivity extends AppCompatActivity implements GoToFirstActivi
             }
         });
 
-        _loginLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
-                finish();
-            }
-        });
     }
 
     public void signup() {
-        Log.d(TAG, "Signup");
-
+        name = _nameText.getText().toString();
+        email = _emailText.getText().toString();
+        password = _passwordText.getText().toString();
         if (!validate()) {
             onSignupFailed(3);
             return;
@@ -73,15 +99,13 @@ public class SignupActivity extends AppCompatActivity implements GoToFirstActivi
 
         _signupButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.Theme_AppCompat_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
-        progressDialog.show();
-
-        final String name = _nameText.getText().toString();
-        final String email = _emailText.getText().toString();
-        final String password = _passwordText.getText().toString();
+        final ProgressDialog progressBar= new ProgressDialog(this);
+        progressBar.setCancelable(true);
+        progressBar.setMessage("Please wait...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.setProgress(0);
+        progressBar.setMax(100);
+        progressBar.show();
 
         // TODO: Implement your own signup logic here.
 
@@ -98,7 +122,7 @@ public class SignupActivity extends AppCompatActivity implements GoToFirstActivi
                             }
                             else if(memberPresenter.insertMember(name,email,password)) {
                                 member_id=memberPresenter.getId(email);
-                                memberPresenter.updateSession(member_id,1);
+                                memberPresenter.deleteMember(member_id);
                                 onSignupSuccess();
                             }
                             else
@@ -106,38 +130,13 @@ public class SignupActivity extends AppCompatActivity implements GoToFirstActivi
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        progressDialog.dismiss();
+                        progressBar.dismiss();
                     }
-                }, 3000);
-    }
-
-    public void onSignupSuccess() {
-        _signupButton.setEnabled(true);
-        Toast.makeText(getBaseContext(), "Sign up Success", Toast.LENGTH_LONG).show();
-        setResult(RESULT_OK, null);
-        memberPresenter.changeActivity();
-    }
-
-    public void onSignupFailed(int id) {
-        if(id==1) {
-            Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getBaseContext(), "This Email/Phone is already used", Toast.LENGTH_LONG).show();
-        }
-        else if(id==2)
-        {
-            Toast.makeText(getBaseContext(), "No Internet", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
-        }
-        _signupButton.setEnabled(true);
+                }, 4000);
     }
 
     public boolean validate() {
         boolean valid = true;
-
-        String name = _nameText.getText().toString();
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
-
         if (name.isEmpty() || name.length() < 3) {
             _nameText.setError("at least 3 characters");
             valid = false;
@@ -162,12 +161,50 @@ public class SignupActivity extends AppCompatActivity implements GoToFirstActivi
         return valid;
     }
 
+    public void onSignupSuccess() throws ExecutionException, InterruptedException {
+
+        _signupButton.setEnabled(true);
+        setResult(RESULT_OK, null);
+        memberPresenter.goToVerifyActivity();
+    }
+
+    public void onSignupFailed(int id) {
+        if(id==1) {
+            Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "This Email/Phone is already used", Toast.LENGTH_LONG).show();
+        }
+        else if(id==2)
+        {
+            Toast.makeText(getBaseContext(), "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
+        }
+        _signupButton.setEnabled(true);
+    }
+
+
+
     @Override
-    public void changeActivity() {
-        Intent intent=new Intent(this,FirstActivity.class);
-        intent.putExtra("id",member_id);
+    public void changeActivity() throws ExecutionException, InterruptedException {
+        Random random=new Random();
+        String code=String.format("%06d", random.nextInt(999999));
+        if(email.contains("@")) {
+            verifyMailAddress vm = new verifyMailAddress(SignupActivity.this);
+            vm.execute(email, code);
+        }else
+        {
+            dbConnectionForTextData dbcon=new dbConnectionForTextData(SignupActivity.this);
+            dbcon.execute("member/"+VERIFY_BY_SMS+"?phoneNumber="+email+"&"+"otp="+code).get();
+        }
+        Intent intent=new Intent(SignupActivity.this,VerifyMailActivity.class);
+        intent.putExtra("email",email);
+        intent.putExtra("name",name);
+        intent.putExtra("password",password);
+        intent.putExtra("code",code);
+        intent.putExtra("addAd",addAd);
         startActivity(intent);
         finish();
 
+
     }
+
 }

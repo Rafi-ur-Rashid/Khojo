@@ -9,18 +9,22 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".View.AdvertiseListActivity"
     tools:showIn="@layout/activity_advertise_list"
-    android:weightSum="10">
+    android:weightSum="10.0">
+
     <ListView
         android:id="@+id/advertiseList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9" />
+        android:divider="@color/colorPrimaryDark"
+        android:dividerHeight="1.5dp"
+        android:layout_weight="9.2" />
 
     <LinearLayout
+        android:id="@+id/addAdlayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:layout_weight="0.8"
+        android:background="@color/colorPrimaryDark">
 
         <Button
             android:id="@+id/addAd"
@@ -32,7 +36,7 @@
             android:onClick="addAnewAd"
             android:text="Advertise your Property"
             android:textColor="@android:color/background_light"
-            android:textSize="20dp"
-            app:backgroundTint="@color/colorPrimary" />
+            android:textSize="18dp"
+            app:backgroundTint="@color/colorPrimaryDark" />
     </LinearLayout>
 </LinearLayout>

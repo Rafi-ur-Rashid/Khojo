@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <ListView
+        android:id="@+id/dropdownList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:divider="@color/colorPrimaryDark"
+        android:dividerHeight="1dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OKAY"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textSize="15dp"
+            android:textColor="@android:color/background_light"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorAccent"
+            android:layout_alignParentRight="true"
+            android:onClick="setFilter"/>
+    </RelativeLayout>
+</LinearLayout>

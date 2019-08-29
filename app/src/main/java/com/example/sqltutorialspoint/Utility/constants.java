@@ -1,25 +1,124 @@
 package com.example.sqltutorialspoint.Utility;
 
+import java.util.HashMap;
+
 public class constants {
-    public static final String dbServer="192.168.0.102";
+    public static final String dbServer="192.168.0.105";
     public static final int REQUEST_LOGIN = 0;
     public static final int REQUEST_SIGNUP = 0;
-    public static final String ADMIN_INSERT_PHP = "admin_insert.php";
+    public static final int REQUEST_CAMERA=0;
+    public static final int SELECT_FILE=0;
+    public static final String UPLOAD_KEY = "image";
+    private int PICK_IMAGE_REQUEST = 1;
+    public static final int MY_PERMISSIONS_REQUEST_PHONE_CALL=0;
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+    public static final String CHECK_CONNECTION_SERVER="check_conn.php";
+    public static final String ADMIN_NAME_BY_ID = "adminName_by_id.php";
     public static final String MEMBER_INSERT_PHP = "member_insert.php";
     public static final String MEMBER_PASS_BY_EMAIL = "password_by_email_Phone.php";
     public static final String MEMBER_ID_BY_EMAIL = "memberId_by_email_Phone.php";
+    public static final String MEMBER_NAME_BY_ID = "memberName_by_ID.php";
+    public static final String EMAIL_PHONE_BY_ID = "member_email_Phone_by_ID.php";
+    public static final String MEMBER_ADDRESS_BY_ID = "member_Address_by_ID.php";
+    public static final String PASSWORD_BY_ID = "member_Password_by_ID.php";
+    public static final String FEATURES_BY_ID = "features_by_adId.php";
     public static final String UPDATE_SESSION_BY_ID = "update_loginStat_by_memberID.php";
+    public static final String DELETE_MEMBER_BY_ID = "delete_member_by_memberID.php";
     public static final String GET_ALL_AD_ID="advertise_Id.php";
+    public static final String GET_ALL_AD_NAME="advertise_name.php";
+    public static final String GET_ALL_AD_TYPE="advertise_type.php";
+    public static final String GET_ALL_AD_LOCATION="advertise_location.php";
+    public static final String GET_ALL_AD_PRICE="advertise_price.php";
+    public static final String GET_ALL_AD_DATE="advertise_date.php";
+    public static final String GET_ALL_AD_IMAGE="advertise_image.php";
     public static final String AD_NAME_BY_ID = "name_by_adId.php";
     public static final String AD_TYPE_BY_ID = "type_by_adId.php";
     public static final String AD_LOCATION_BY_ID = "location_by_adId.php";
+    public static final String AD_ADDRESS_BY_ID = "address_by_adId.php";
     public static final String AD_PRICE_BY_ID = "price_by_adId.php";
     public static final String AD_DATE_BY_ID = "date_by_adId.php";
+    public static final String AD_CONTACT_BY_ID = "contact_by_adId.php";
+    public static final String AD_IMAGE_BY_ID = "image_by_adId.php";
+    public static final String AD_REPORT_REMARK_BY_ID = "Reported_remark_by_adId.php";
+    public static final String AD_ID_BY_TYPE = "Ad_id_by_type.php";
+    public static final String AD_NAME_BY_TYPE = "Title_by_type.php";
+    public static final String AD_LOCATION_BY_TYPE = "Location_by_type.php";
+    public static final String AD_PRICE_BY_TYPE = "Price_by_type.php";
+    public static final String AD_DATE_BY_TYPE = "Date_by_type.php";
+    public static final String AD_ID_BY_PLACES = "Ad_id_by_places.php";
+    public static final String AD_NAME_BY_PLACES = "Title_by_places.php";
+    public static final String AD_TYPE_BY_PLACES = "type_by_places.php";
+    public static final String AD_PRICE_BY_PLACES = "Price_by_places.php";
+    public static final String AD_DATE_BY_PLACES = "Date_by_places.php";
+    public static final String AD_ID_BY_TYPES = "Ad_id_by_types.php";
+    public static final String AD_NAME_BY_TYPES = "Title_by_types.php";
+    public static final String AD_LOCATION_BY_TYPES = "Location_by_types.php";
+    public static final String AD_PRICE_BY_TYPES = "Price_by_types.php";
+    public static final String AD_DATE_BY_TYPES = "Date_by_types.php";
+    public static final String AD_ID_BY_PRICES = "Ad_id_by_prices.php";
+    public static final String AD_NAME_BY_PRICES = "Title_by_prices.php";
+    public static final String AD_LOCATION_BY_PRICES = "Location_by_prices.php";
+    public static final String AD_DATE_BY_PRICES = "Date_by_prices.php";
+    public static final String AD_TYPE_BY_PRICES = "Type_by_prices.php";
+    public static final String AD_ID_BY_TYPE_LOC = "Ad_id_by_type_location.php";
+    public static final String AD_NAME_BY_TYPE_LOC = "Title_by_type_location.php";
+    public static final String AD_LOCATION_BY_TYPE_LOC = "Location_by_type.php";
+    public static final String AD_PRICE_BY_TYPE_LOC = "Price_by_type_location.php";
+    public static final String AD_DATE_BY_TYPE_LOC = "Date_by_type_location.php";
 
+    public static final String AD_NAMES_BY_ID = "advertise_name_by_memberID.php";
+    public static final String AD_TYPES_BY_ID = "advertise_type_by_memberID.php";
+    public static final String AD_LOCATIONS_BY_ID = "advertise_location_by_memberID.php";
+    public static final String AD_PRICES_BY_ID = "advertise_price_by_memberID.php";
+    public static final String AD_DATES_BY_ID = "advertise_date_by_memberID.php";
+    public static final String AD_IDS_BY_ID = "advertise_Id_by_memberID.php";
+    public static final String AD_VERIFIED_BY_ID = "advertise_verified_by_memberID.php";
+    public static final String AD_DELETED_BY_ID = "advertise_deleted_by_memberID.php";
+    public static final String VERIFY_BY_SMS=   "verify_by_sms.php";
+    public static final String INSERT_ADVERTISE = "advertise_insert.php";
+    public static final String UPDATE_HOSTEL_SEAT_NO = "update_hostel_seatNo_by_adId.php";
+    public static final String UPDATE_HOSTEL_TYPE = "update_hostel_type_by_adId.php";
+    public static final String UPDATE_FLAT_ROOM_NO = "update_flat_roomNo_by_adId.php";
+    public static final String UPDATE_FLAT_SPACE = "update_flat_space_by_adId.php";
+    public static final String UPDATE_ROOMMATE_NO = "update_roommateNo_by_adId.php";
+    public static final String UPDATE_ROOMMATE_GENDER = "update_roommate_gender_by_adId.php";
+    public static final String UPDATE_FEATURES = "update_Ad_features_by_adId.php";
+    public static final String GET_MAX_ID = "getMax_adId.php";
+    public static final String DELETE_AD_BY_ADID = "delete_Ad_by_adID.php";
+    public static final String HOSTEL_SEATNO_BY_ID = "hostel_seatNo_by_adId.php";
+    public static final String HOSTEL_TYPE_BY_ID = "hostel_type_by_adId.php";
+    public static final String FLAT_ROOMNO_BY_ID = "flat_roomNo_by_adId.php";
+    public static final String FLAT_SPACE_BY_ID = "flat_space_by_adId.php";
+    public static final String ROOMMATE_NO_BY_ID = "Roommate_No_by_adId.php";
+    public static final String ROOMMATE_TYPE_BY_ID = "Roommate_type_by_adId.php";
+    public static final String AD_DESC_BY_ID = "desc_by_adId.php";
+    public static final String INSERT_AD_REPORT = "insert_adReport.php";
+    public static final String GET_AD_REPORT_ID = "AdReport_id_unserved.php";
+    public static final String GET_AD_REPORT_ADID = "AdReport_Adid_unserved.php";
+    public static final String GET_AD_REPORT_MEMBERID = "AdReport_MemberId_unserved.php";
+    public static final String GET_AD_REPORT_COMMENT = "AdReport_Comment_unserved.php";
+    public static final String GET_AD_REPORT_DATE = "AdReport_Date_unserved.php";
+    public static final String GET_AD_DATE_UNVERIFIED = "advertise_date_unverified.php";
+    public static final String GET_AD_ID_UNVERIFIED = "advertise_Id_unverified.php";
+    public static final String GET_AD_MEMBERID_UNVERIFIED = "member_Id_unverified.php";
+    public static final String GET_AD_MODIFIED_UNVERIFIED = "Add_modified_unverified.php";
+    public static final String UPDATE_VERIFIED = "update_verified_by_adId.php";
+    public static final String UPDATE_NOTIFIED = "update_notified_by_adId.php";
+    public static final String UPDATE_NOTIFIED_BY_MEMBERID = "update_notified_by_memberId.php";
+    public static final String UPDATE_REPORTED = "update_reported_by_adId.php";
+    public static final String UPDATE_MODIFIED = "update_modified_by_adId.php";
+    public static final String UPDATE_CLICKED ="update_clicked_by_adId.php";
+    public static final String UPDATE_REPORT_REMARK = "update_reported_remark_by_adId.php";
+    public static final String GET_ADID_NON_NOTIFIED_VERIFIED = "AdId_of_non_notified_verified.php";
+    public static final String GET_ADID_NON_NOTIFIED_DELETED = "AdId_of_non_notified_deleted.php";
+    public static final HashMap<Integer, String> MONTH_MAP = new HashMap<Integer, String>(){{put(1,"January"); put(2, "February");put(3, "March");put(4, "April");put(5,"May");put(6, "June");put(7,"July");put(8,"August");put(9, "September");put(10, "October");put(11,"November");put(12, "December");}};
     public static final String[] CATEGORIES = {"Hostel","Roommate","Sublet","Flat","Shop","Office"};
-    public static final String[] PLACES={"Dhanmondi 27", "Dhanmondi 32", "Kalabagan", "New Market", "Asad Gate", "Mohammadpur", "Shyamoli",
+    public static final String[] PLACES={"Badda","Dhanmondi", "Kalabagan", "New Market", "Asad Gate", "Mohammadpur", "Shyamoli",
             "Kallyanpur", "Gabtoli", "Farmgate", "Tejgaon", "Kawran Bazar", "Bangla Motor", "Hatirpool",
             "Shahbag", "Kathalbagan", "Azimpur", "Kataban", "Nilkhet", "Moghbazar", "Kakrail", "Paltan",
             "Fakirapool", "Motijheel", "Kamalapur","Lalbagh","Mirpur-1","Mirpur-2","Mirpur-10","Mirpur-14","Uttara",
-            "Banani","Gulshan","Zigatola","Gulistan","Jatrabari","Mohakhali"};
+            "Banani","Gulshan","Zigatola","Gulistan","Jatrabari","Mohakhali","Rampura","Ramna","Malibagh"};
+    public static final String[] PRICES={"0-5000","5000-10,000","10,000-20,000","20,000-30,000","30,000-50,000","50,000-100,000","Over 100,000"};
+    public static final String[][] PRICE_BOUNDS={{"0","5000"},{"5000","10000"},{"10000","20000"},{"20000","30000"},{"30000","50000"},{"50000","100000"},{"100000","10000000"}};
+
 }

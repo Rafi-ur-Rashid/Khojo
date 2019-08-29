@@ -25,10 +25,12 @@
                android:layout_weight="1">
 
                <LinearLayout
+                   android:id="@+id/hostel"
                    android:layout_width="0dp"
                    android:layout_height="match_parent"
                    android:layout_weight="1"
                    android:gravity="center"
+                   android:onClick="goHostel"
                    android:orientation="vertical">
 
                    <ImageView
@@ -37,6 +39,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="0dp"
                        android:layout_weight="3"
+                       android:onClick="goHostel"
                        android:background="@android:color/background_light"
                        app:srcCompat="@mipmap/hostel" />
 
@@ -52,10 +55,12 @@
                </LinearLayout>
 
                <LinearLayout
+                   android:id="@+id/roommate"
                    android:layout_width="0dp"
                    android:layout_height="match_parent"
                    android:layout_weight="1"
                    android:gravity="center"
+                   android:onClick="goRoommate"
                    android:orientation="vertical">
 
                    <ImageButton
@@ -63,6 +68,7 @@
                        style="@android:style/Widget.Holo.ImageButton"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:onClick="goRoommate"
                        android:background="@android:color/background_light"
                        app:srcCompat="@mipmap/roommate" />
 
@@ -76,10 +82,12 @@
                </LinearLayout>
 
                <LinearLayout
+                   android:id="@+id/shop"
                    android:layout_width="0dp"
                    android:layout_height="match_parent"
                    android:layout_weight="1"
                    android:gravity="center"
+                   android:onClick="goShop"
                    android:orientation="vertical">
 
                    <ImageButton
@@ -87,6 +95,7 @@
                        style="@android:style/Widget.Holo.ImageButton"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:onClick="goShop"
                        android:background="@android:color/background_light"
                        app:srcCompat="@mipmap/showroom" />
 
@@ -106,10 +115,12 @@
                android:layout_weight="1">
 
                <LinearLayout
+                   android:id="@+id/sublet"
                    android:layout_width="0dp"
                    android:layout_height="match_parent"
                    android:layout_weight="1"
                    android:gravity="center"
+                   android:onClick="goSublet"
                    android:orientation="vertical">
 
                    <ImageButton
@@ -117,6 +128,7 @@
                        style="@android:style/Widget.Holo.ImageButton"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:onClick="goSublet"
                        android:background="@android:color/background_light"
                        app:srcCompat="@mipmap/sublet" />
 
@@ -131,10 +143,12 @@
                </LinearLayout>
 
                <LinearLayout
+                   android:id="@+id/flat"
                    android:layout_width="0dp"
                    android:layout_height="match_parent"
                    android:layout_weight="1"
                    android:gravity="center"
+                   android:onClick="goFlat"
                    android:orientation="vertical">
 
                    <ImageButton
@@ -142,6 +156,7 @@
                        style="@android:style/Widget.Holo.ImageButton"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:onClick="goFlat"
                        android:background="@android:color/background_light"
                        app:srcCompat="@mipmap/tolet" />
 
@@ -155,10 +170,12 @@
                </LinearLayout>
 
                <LinearLayout
+                   android:id="@+id/office"
                    android:layout_width="0dp"
                    android:layout_height="match_parent"
                    android:layout_weight="1"
                    android:gravity="center"
+                   android:onClick="goOffice"
                    android:orientation="vertical">
 
                    <ImageButton
@@ -166,6 +183,7 @@
                        style="@android:style/Widget.Holo.ImageButton"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:onClick="goOffice"
                        android:background="@android:color/background_light"
                        app:srcCompat="@mipmap/office" />
 
@@ -194,11 +212,11 @@
                android:id="@+id/textView"
                android:layout_width="wrap_content"
                android:layout_height="0dp"
-               android:gravity="center"
                android:layout_weight="1"
+               android:gravity="center"
                android:paddingLeft="5dp"
-               android:textColor="@android:color/background_dark"
                android:text="What are you searching?"
+               android:textColor="@android:color/background_dark"
                android:textSize="18dp" />
 
            <LinearLayout
@@ -217,15 +235,16 @@
            </LinearLayout>
 
            <AutoCompleteTextView
-               android:id="@+id/autoCompleteTextView1"
+               android:id="@+id/input_location"
                android:layout_width="150dp"
                android:layout_height="0dp"
                android:layout_weight="1"
+               android:gravity="center"
                android:backgroundTint="@color/colorPrimary"
-               android:dropDownWidth="wrap_content"
+               android:dropDownWidth="200dp"
                android:dropDownHeight="wrap_content"
                android:ems="8"
-               android:hint=" Location:"
+               android:hint=" Location"
                android:textSize="18dp" />
            <LinearLayout
                android:layout_width="wrap_content"
@@ -241,6 +260,7 @@
                    android:text="Search"
                    android:textColor="@android:color/background_light"
                    android:textSize="15dp"
+                   android:onClick="searchNow"
                    app:backgroundTint="#009688" />
            </LinearLayout>
        </LinearLayout>
@@ -288,6 +308,7 @@
                        android:layout_gravity="top|left"
                        android:text="Advertise Here"
                        android:paddingBottom="5dp"
+                       android:onClick="addnewAd"
                        app:backgroundTint="@color/colorPrimary" />
                </LinearLayout>
            </LinearLayout>

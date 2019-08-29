@@ -11,17 +11,14 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.sqltutorialspoint.Utility.constants;
-import com.example.sqltutorialspoint.Presenter.AdminPresenter;
 import com.example.sqltutorialspoint.R;
+import com.example.sqltutorialspoint.Utility.constants;
 
 public class MainActivity extends Activity {
-    AdminPresenter adminPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        adminPresenter=new AdminPresenter(this);
         final ProgressDialog progressBar= new ProgressDialog(this);
         progressBar.setCancelable(true);
         progressBar.setMessage("Checking Connectivity...");
@@ -33,11 +30,12 @@ public class MainActivity extends Activity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
                         try {
+
                             ConnectivityManager conMgr =  (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
                             NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
                             if (netInfo == null){
+
                                 new AlertDialog.Builder(MainActivity.this)
                                         .setMessage("No Internet")
 
