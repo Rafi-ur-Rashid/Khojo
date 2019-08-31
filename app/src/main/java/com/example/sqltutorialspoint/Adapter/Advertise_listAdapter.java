@@ -27,7 +27,7 @@ public class Advertise_listAdapter extends BaseAdapter{
     Context c;
     TextView name,type,price,location,date,verify;
     boolean user_ad,verified,deleted;
-    ImageView photo;
+    ImageView photo,ratings;
     ArrayList<String[]> list;
     ArrayList<Bitmap>bm;
     public Advertise_listAdapter(Context c, ArrayList<String[]> list,ArrayList<Bitmap>bm,boolean user_ad) {
@@ -56,6 +56,7 @@ public class Advertise_listAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        int clicked=0;
         if(user_ad) {
             convertView = inflater.inflate(R.layout.advertise_list_element, parent, false);
             if(list.get(list.size()-position-1)[5].equals("1"))
@@ -66,15 +67,18 @@ public class Advertise_listAdapter extends BaseAdapter{
                 deleted=true;
             else
                 deleted=false;
-        }else
+            clicked=Integer.parseInt(list.get(list.size()-position-1)[8]);
+        }else {
             convertView = inflater.inflate(R.layout.advertise_list_element, parent, false);
-        name = (TextView) convertView.findViewById(R.id.name);
+            clicked=Integer.parseInt(list.get(list.size()-position-1)[6]);
+        }name = (TextView) convertView.findViewById(R.id.name);
         type= (TextView) convertView.findViewById(R.id.type);
         price= (TextView) convertView.findViewById(R.id.price);
         location= (TextView) convertView.findViewById(R.id.location);
         date= (TextView) convertView.findViewById(R.id.time);
         verify=(TextView)convertView.findViewById(R.id.verified);
         photo = (ImageView) convertView.findViewById(R.id.photo);
+        ratings=(ImageView) convertView.findViewById(R.id.rating);
         photo.setImageBitmap(bm.get(list.size()-position-1));
         name.setText(list.get(list.size()-position-1)[0].toUpperCase());
         type.setText("@"+list.get(list.size()-position-1)[1]);
@@ -92,6 +96,7 @@ public class Advertise_listAdapter extends BaseAdapter{
         }
 
         try {
+
             String time=list.get(list.size()-position-1)[4];
             String format = "yyyy-MM-dd hh:mm:ss";
             SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -100,6 +105,17 @@ public class Advertise_listAdapter extends BaseAdapter{
             Date dateObj2 = sdf.parse(timeStamp);
             long diff = dateObj2.getTime() - dateObj1.getTime();
             int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+            int rating=getRating(clicked,diffDays);
+            if(rating==1)
+                ratings.setImageDrawable(ContextCompat.getDrawable(c,R.drawable.star_1));
+            else if(rating==2)
+                ratings.setImageDrawable(ContextCompat.getDrawable(c,R.drawable.star_2));
+            else if(rating==3)
+                ratings.setImageDrawable(ContextCompat.getDrawable(c,R.drawable.star_3));
+            else if(rating==4)
+                ratings.setImageDrawable(ContextCompat.getDrawable(c,R.drawable.star_4));
+            else if(rating==5)
+                ratings.setImageDrawable(ContextCompat.getDrawable(c,R.drawable.star_5));
             StringTokenizer st=new StringTokenizer(time," ");
             time=st.nextToken();
             st=new StringTokenizer(time,"-");
@@ -111,5 +127,22 @@ public class Advertise_listAdapter extends BaseAdapter{
         }
 
         return convertView;
+    }
+
+    int getRating(int clicks,int days){
+        int rating=1;
+        double val=clicks*1.0/days;
+        if(val<0.1)
+            rating=1;
+        else if(val>=0.1 && val<0.4)
+            rating=2;
+        else if(val>=0.4 && val<0.7)
+            rating=3;
+        else if(val>=0.7 && val<1)
+            rating=4;
+        else if(val>=1)
+            rating=5;
+        return rating;
+
     }
 }
